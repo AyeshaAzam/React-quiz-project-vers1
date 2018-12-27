@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import Navbar from './components/layout/Navbar';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Login from './components/Login'
+import CreateQuiz from './components/CreateQuiz'
 import './App.css';
+import Quizpage from './components/Quizpage';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+    <Router>
+     <Switch> {/* wrapper for your router, given alias from BrowserRouter */}
+        <div className="App">
+          {/* <Navbar />
+            <Login /> */}
+            <Route exact path="/" component={Quizpage} /> 
+            <Route exact path="/Login" component={Login} />
+            <Route exact path="/create" component={CreateQuiz}/> 
+            {/*  <IndexRoute component={Navbar}/>
+            <Route path="/create" component={CreateQuiz}/> 
+            <Route path="*" component={NotFound} />*/}
+        </div>
+      </Switch>
+    </Router>
     );
   }
 }
