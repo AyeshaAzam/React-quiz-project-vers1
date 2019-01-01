@@ -6,31 +6,85 @@ import { Input } from 'reactstrap';
 import { Card, Button, CardHeader, CardFooter, CardBody,
          FormGroup, Label 
        } from 'reactstrap';
+/**
+ 
+       quiestions:[
+           {
+            questions: '',
+            options: []    
+        },
+           {
+            questions: '',
+            options: []    
+        },
+           {
+            questions: '',
+            options: []    
+        },
+           {
+            questions: '',
+            options: []    
+        },
+       ]
+
+
+ */
 
 
  class Quizpage extends Component {
+     state = {
+        options: ['', ''],
+        questions: [{}],
+     }
+
+//functions:
+createNewOption = () => {
+ this.setState((prevState) => ({
+   options: [
+       
+       ...prevState.options , ''
+    ],
+ }));
+}
+
+//https://www.youtube.com/watch?v=UmuLW78biBw&list=PL4cUxeGkcC9ij8CfkAY2RAGb-tmkNwQHG&index=19
+deleteNewOption = idx => {
+
+   let options = [...this.state.options]
+
+   options.splice(idx , 1)
+
+   this.setState({
+       options
+   })
+}
+
+  setOptionText = e => {
+      
+      let options = [...this.state.options]
+      options[e.target.dataset.optionid] = e.target.value
+      this.setState({options})
+  }
+
   render() {
+    const {options, questions} = this.state
     return (
-      <div>
+    <div>
         <Navbar />
 
         <div>
         <Card className="card">
-            <CardHeader>
-              Question 1:  
+        {questions.map((question, i) => 
+             <CardHeader key= {i}>
+              {`Question #${i + 1}`}
             </CardHeader>
+        )}
             <CardBody>
                 <FormGroup>
                 <Label for="answer">Question</Label>
                    <Input
                       placeholder="Enter quiz question"
                       //value={question}
-                      onChange={e =>
-                        this.props.setQuestionTitle(
-                        this.props.index,
-                        e.target.value
-                        )
-                       }
                     />
                     <Label for="answer">Answer</Label>
                     <Input
@@ -44,24 +98,33 @@ import { Card, Button, CardHeader, CardFooter, CardBody,
                 {/* // want to create dynamically 
                 //https://itnext.io/building-a-dynamic-controlled-form-in-react-together-794a44ee552c 
                 */}
-                 <FormGroup> 
-                    <div className='d-flex'>
-                    <Input 
-                        type="text"
-                        placeholder="Option 1"
-                        />
-                        <Button
-                        color="danger"
-                        size="sm"  
-                        className="ml-2"
-                        > X
-                        </Button>
+             
+             {options.map((option, idx) => (
+              <FormGroup key={idx}> 
+                 {/* let optionId = `option-${idx + 1}` */}
+
+                    <div className='d-flex' >
+                        <Input 
+                            key={idx}
+                            type="text"
+                            placeholder={`Option ${++idx}`}
+                            value={option}
+                            data-optionid={--idx}
+                            onChange={this.setOptionText}
+                            />
+                        { this.state.options.length > 2 &&  <Button
+                            color="danger"
+                            size="sm"  
+                            className="ml-2"
+                            onClick={() => {this.deleteNewOption(idx)}} // not getting the id
+                            > &times;
+                         </Button>}
                     </div>
-  
-                    <div className='d-flex'>
+
+                   {/*  <div className='d-flex'>
                         <Input 
                             type="text"
-                            placeholder="Option 2"
+                            placeholder={`Option ${++idx}`}
                         />
                         <Button
                             color="danger"
@@ -69,18 +132,25 @@ import { Card, Button, CardHeader, CardFooter, CardBody,
                             className="ml-2"
                         > X
                         </Button>
-                    </div>
-                 </FormGroup>
-            </CardBody>
+                    </div> */}
+           </FormGroup>
+        ))}   
+     
+           <button 
+                class="btn btn-success"
+                onClick={this.createNewOption}
+                > + 
+            </button>
+           </CardBody>
         </Card>
         <CardFooter>
             <button 
-            class="btn btn-success"
-            > + 
+                class="btn btn-success"
+                > New Question 
             </button>
         </CardFooter>
         </div>
-      </div>
+    </div>
     )
   }
 }

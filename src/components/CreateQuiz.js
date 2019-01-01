@@ -12,7 +12,18 @@ class CreateQuiz extends Component {
         this.state = {
             title: '',
             description: '',
-            quizQuest: {},
+            quizQuest: [
+                {
+                   question: "", 
+                   options: ['', ''],
+                   answer: ''
+                },
+                {
+                    question: "", 
+                    options: ['', ''],
+                    answer: ''
+                 }
+            ],
             user_answers: [],
             step: 0
           };
@@ -62,7 +73,7 @@ class CreateQuiz extends Component {
                 <Form onSubmit={this.onSubmit}  className="form">
                 <Col md={8} className="mx-auto">
                     <Col>
-                        <FormGroup>
+                    <FormGroup>
                         <Label>Title</Label>
                         <Input
                             type="text"
@@ -72,7 +83,7 @@ class CreateQuiz extends Component {
                             onChange = {this.onChange}
                             value={this.state.title}
                         />
-                        </FormGroup>
+                    </FormGroup>
                         <br />
                     </Col>
                    
