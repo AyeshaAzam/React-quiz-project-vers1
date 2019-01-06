@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from '../components/layout/Navbar';
 import Button from '@material-ui/core/Button';
 import { Col, FormGroup, Input, Label, Form } from 'reactstrap';
+//import Quizpage from './Quizpage';
 
 
 
@@ -12,7 +13,7 @@ class CreateQuiz extends Component {
         this.state = {
             title: '',
             description: '',
-            quizQuest: [
+            quizQuestions: [
                 {
                    question: "", 
                    options: ['', ''],
@@ -100,10 +101,12 @@ class CreateQuiz extends Component {
                         />
                         </FormGroup>
                     </Col>
+                    <h3>CREATE QUESTIONS </h3>
                     <Button variant="contained" color="secondary" type="submit">
                         Submit
                      </Button>
                 </Col>
+                
                    
                 </Form>
             </div>

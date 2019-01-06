@@ -19,9 +19,17 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/create" component={CreateQuiz}/>
             <Route exact path="/catsForm" component={CatsForm}/>  
-            {/*  <IndexRoute component={Navbar}/>
+            {/*  
+            <IndexRoute component={Navbar}/>
             <Route path="/create" component={CreateQuiz}/> 
-            <Route path="*" component={NotFound} />*/}
+            <Route path="*" component={NotFound} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/contact" component={MyForm} />  
+            <Route exact path="/post/:id" component={SinglePost} />
+            <Route exact path="/posts" component={Posts} />  
+            <Route exact path="/author/:id" component={Author} /> 
+            <Route  render={() => (<h1 className= 'display-2 text-center'> 404 Not Found</h1>)}
+            */}
         </div>
       </Switch>
     </Router>
